@@ -4,8 +4,6 @@ import math
 import os
 
 
-
-
 class Planeta:
     def __init__(self, x=0, y=0,centro=(0, 0), nomearquivo = ""):
         self.x = x
@@ -19,7 +17,7 @@ class Planeta:
     def atualizar(self, deltaT):
         self.x = self.centro[0] + (self.raioDistancia) * math.cos(math.radians(self.angulo))
         self.y = self.centro[1] + (self.raioDistancia) * math.sin(math.radians(self.angulo))
-        self.angulo += 5
+        self.angulo += 1.5
 
     def cria_planeta(self):
 
@@ -28,7 +26,6 @@ class Planeta:
         self.planeta.center_y = self.y
         
 
-        
 class Estrelas:
     def __init__(self, lim_x=0, lim_y=0):
         
@@ -51,6 +48,7 @@ class Estrelas:
             estrela.center_y = y
 
             self.listaestrelas.append(estrela)
+
 
 class Sistema:
     def __init__(self, comprimento=1200, altura=800):
@@ -77,8 +75,9 @@ class Sistema:
             self.estrelas.listaestrelas[i].draw()
 
         self.terra.cria_planeta()
-        self.terra.planeta.draw()
         self.sol.cria_planeta()
+        
+        self.terra.planeta.draw()
         self.sol.planeta.draw()
         
     def run(self):
@@ -91,9 +90,8 @@ class Sistema:
         arcade.run()
         arcade.close_window()
 
+
 if __name__ == "__main__":
 
     Sistema_solar = Sistema()
-
-    
     Sistema_solar.run()
