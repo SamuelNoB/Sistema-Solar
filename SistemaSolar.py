@@ -38,12 +38,13 @@ class Estrelas:
 
     def cria_estrela(self):
         for i in range(self.N):
-            Spritescale = random.randint(1, 7)
+            Spritescale = random.randint(3, 9)
+            Spritescale = Spritescale/10
             x =  random.randint(0,self.lim_x)
             y = random.randint(0,self.lim_y)
             estrela = None
-            tipostar = random.randint(0, 4)
-            estrela = arcade.Sprite("estrela1.png", Spritescale)
+            
+            estrela = arcade.Sprite("sprites/estrela1.png", Spritescale)
 
             estrela.center_x = x
             estrela.center_y = y
