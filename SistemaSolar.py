@@ -3,7 +3,7 @@ import random
 import math
 import os
 
-Spritescale = 0.3
+
 
 
 class Planeta:
@@ -30,22 +30,20 @@ class Planeta:
         
 class Estrelas:
     def __init__(self, lim_x=0, lim_y=0):
-        self.localizaçaoestrelas = ["sprites/estrela1.png", "sprites/estrela2.png", 
-                                                           "sprites/estrela3.png", "sprites/estrela4.png",
-                                                           "sprites/estrela5.png"]
+        
         self.listaestrelas = []
         self.N = 200
         self.lim_x = lim_x
         self.lim_y = lim_y
 
     def cria_estrela(self):
-
         for i in range(self.N):
+            Spritescale = random.randint(1, 7)
             x =  random.randint(0,self.lim_x)
             y = random.randint(0,self.lim_y)
             estrela = None
             tipostar = random.randint(0, 4)
-            estrela = arcade.Sprite(self.localizaçaoestrelas[tipostar], Spritescale)
+            estrela = arcade.Sprite("estrela1.png", Spritescale)
 
             estrela.center_x = x
             estrela.center_y = y
