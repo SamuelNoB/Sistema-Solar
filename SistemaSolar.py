@@ -7,14 +7,14 @@ import os
 
 
 class Planeta:
-    def __init__(self, raio=100, x=0, y=0, cor=(255, 255, 0), centro=(0, 0)):
-        self.raio = raio
+    def __init__(self, x=0, y=0,centro=(0, 0), nomearquivo = ""):
         self.x = x
         self.y = y
-        self.cor = cor
         self.centro = centro
         self.raioDistancia = math.sqrt((self.x - self.centro[0])**2 + (self.y - self.centro[1])**2)
         self.angulo=0
+        self.Nome = nomearquivo
+        self.planeta = None
 
     def atualizar(self, deltaT):
         self.x = self.centro[0] + (self.raioDistancia) * math.cos(math.radians(self.angulo))
@@ -22,10 +22,11 @@ class Planeta:
         self.angulo += 5
 
     def cria_planeta(self):
-        arcade.draw_circle_filled(
-            self.x, self.y,
-            self.raio,
-             self.cor)
+
+        self.planeta = arcade.Sprite(self.Nome, 1)
+        self.planeta.center_x = self.x
+        self.planeta.center_y = self.y
+        
 
         
 class Estrelas:
@@ -57,12 +58,12 @@ class Sistema:
         self.altura = altura
         self.centro = (self.comprimento/2, self.altura/2)
         self.backgorund = (0, 0, 0)
-        self.sol = Planeta(raio=50, x=self.centro[0], y=self.centro[1])
+        self.sol = Planeta(x=self.centro[0], y=self.centro[1],centro=self.centro, nomearquivo="sprites/Sol.png")
         
         self.estrelas = Estrelas(self.comprimento, self.altura)
         self.estrelas.cria_estrela()
 
-        self.terra = Planeta(raio=10, x=(comprimento/2) + 200,y=self.altura/2, cor=(0, 0, 255), centro=self.centro)
+        self.terra = Planeta(x=(comprimento/2) + 200,y=self.altura/2, centro=self.centro, nomearquivo="sprites/planeta.png")
         self.time = 0
         
     def atualizar(self, deltaT):
@@ -76,7 +77,9 @@ class Sistema:
             self.estrelas.listaestrelas[i].draw()
 
         self.terra.cria_planeta()
+        self.terra.planeta.draw()
         self.sol.cria_planeta()
+        self.sol.planeta.draw()
         
     def run(self):
         arcade.open_window(self.comprimento, self.altura,'Sistema Solar')
