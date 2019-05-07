@@ -30,7 +30,7 @@ class Estrelas:
     def __init__(self, lim_x=0, lim_y=0):
         
         self.listaestrelas = []
-        self.N = 200
+        self.N = 350
         self.lim_x = lim_x
         self.lim_y = lim_y
 
@@ -71,7 +71,7 @@ class Sistema:
     def desenhar(self, a):
 
         arcade.start_render()
-        for i in range(200):
+        for i in range(self.estrelas.N):
             self.estrelas.listaestrelas[i].draw()
 
         self.terra.cria_planeta()
